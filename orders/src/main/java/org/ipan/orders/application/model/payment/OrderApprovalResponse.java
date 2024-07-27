@@ -1,4 +1,4 @@
-package org.ipan.orders.dto.payment;
+package org.ipan.orders.application.model.payment;
 
 import lombok.Data;
 import org.ipan.common.domain.OrderApprovalStatus;

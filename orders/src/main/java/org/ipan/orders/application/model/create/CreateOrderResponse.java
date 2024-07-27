@@ -1,17 +1,17 @@
-package org.ipan.orders.dto.track;
+package org.ipan.orders.application.model.create;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import org.ipan.common.domain.OrderStatus;
 
-import java.util.List;
 import java.util.UUID;
 
 @Data
-public class TrackOrderResponse {
+public class CreateOrderResponse {
     @NotNull
     private UUID trackingId;
     @NotNull
     private OrderStatus orderStatus;
-    private List<String> failureMessages;
+    @NotNull
+    private String message;
 }

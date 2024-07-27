@@ -1,6 +1,6 @@
-package org.ipan.orders.domain.ports.input.message.listener.payment;
+package org.ipan.orders.application.ports.input.message.listener.payment;
 
-import org.ipan.orders.dto.payment.PaymentResponse;
+import org.ipan.orders.application.model.payment.PaymentResponse;
 
 public interface PaymentResponseMessageListener {
 

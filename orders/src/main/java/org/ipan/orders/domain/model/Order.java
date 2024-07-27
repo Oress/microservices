@@ -7,6 +7,7 @@ import org.ipan.common.domain.OrderStatus;
 import org.ipan.orders.domain.exception.OrderDomainException;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -25,7 +26,7 @@ public class Order {
     private BigDecimal price;
 
     @OneToMany
-    private List<OrderItem> items;
+    private List<OrderItem> items = new ArrayList<>();
 
     @Column(name = "tracking_number")
     private String trackingNumber;
@@ -100,5 +101,12 @@ public class Order {
     public void initializeOrder() {
         status = OrderStatus.PENDING;
         trackingNumber = UUID.randomUUID().toString();
+    }
+
+    public void addItem(String productId, int quantity) {
+        OrderItem item = new OrderItem();
+        item.setProductId(productId);
+        item.setQuantity(quantity);
+        items.add(item);
     }
 }

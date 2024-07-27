@@ -1,4 +1,4 @@
-package org.ipan.orders.dto.create;
+package org.ipan.orders.application.model.create;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
