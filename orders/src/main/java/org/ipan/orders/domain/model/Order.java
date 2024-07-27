@@ -96,4 +96,9 @@ public class Order {
             throw new OrderDomainException("Order is not in correct state for initialization");
         }
     }
+
+    public void initializeOrder() {
+        status = OrderStatus.PENDING;
+        trackingNumber = UUID.randomUUID().toString();
+    }
 }
