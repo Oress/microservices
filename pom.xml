@@ -12,6 +12,7 @@
         <module>customers</module>
         <module>orders</module>
         <module>common</module>
+        <module>payment</module>
     </modules>
 
     <properties>

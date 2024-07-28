@@ -1,4 +1,4 @@
-package org.ipan.orders.application;
+package org.ipan.orders.application.handlers;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
