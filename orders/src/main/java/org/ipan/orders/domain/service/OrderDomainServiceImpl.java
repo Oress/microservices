@@ -1,22 +1,28 @@
 package org.ipan.orders.domain.service;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.ipan.orders.domain.event.OrderCanceledEvent;
 import org.ipan.orders.domain.event.OrderCreatedEvent;
 import org.ipan.orders.domain.event.OrderPaidEvent;
 import org.ipan.orders.domain.model.Order;
+import org.springframework.stereotype.Component;
 
 import java.time.ZonedDateTime;
 
 @Slf4j
+@Component
+@AllArgsConstructor
 public class OrderDomainServiceImpl implements OrderDomainService {
+    private final OrderPriceCalculator orderPriceCalculator;
+
     @Override
     public OrderCreatedEvent validateAndInitiateOrder(Order order) {
-        log.info("Validating and initiating order: {}", order);
-
         // TODO: validate product, customer
+        orderPriceCalculator.calculateTotalPrice(order);
         order.validateOrder();
         order.initializeOrder();
+        log.info("Validated and initiated order: {}", order);
         return new OrderCreatedEvent(order, ZonedDateTime.now());
     }
 

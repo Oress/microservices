@@ -28,8 +28,10 @@ public class OrderController {
     }
 
     @GetMapping("/{trackingId}")
-    public ResponseEntity<TrackOrderResponse> getOrderByTrackingId(@PathVariable UUID trackingId) {
-        TrackOrderResponse trackOrderResponse = orderApplicationService.trackOrder(TrackOrderQuery.builder().trackingId(trackingId).build());
+    public ResponseEntity<TrackOrderResponse> getOrderByTrackingId(@PathVariable String trackingId) {
+        TrackOrderResponse trackOrderResponse = orderApplicationService.trackOrder(TrackOrderQuery.builder()
+                .trackingId(trackingId)
+                .build());
         log.info("Returning order status with tracking id: {}", trackOrderResponse.getTrackingId());
         return  ResponseEntity.ok(trackOrderResponse);
     }

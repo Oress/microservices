@@ -7,6 +7,8 @@ import org.ipan.common.domain.OrderStatus;
 import org.ipan.orders.domain.exception.OrderDomainException;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -14,8 +16,9 @@ import java.util.UUID;
 @Entity
 @Getter
 @Setter
-@Table(name = "orders", schema = "order")
+@Table(name = "orders", schema = "`order`")
 public class Order {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -25,7 +28,7 @@ public class Order {
 
     private BigDecimal price;
 
-    @OneToMany
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> items = new ArrayList<>();
 
     @Column(name = "tracking_number")
@@ -103,10 +106,13 @@ public class Order {
         trackingNumber = UUID.randomUUID().toString();
     }
 
-    public void addItem(String productId, int quantity) {
+    public void addItem(UUID productId, int quantity) {
         OrderItem item = new OrderItem();
+        item.setOrder(this);
         item.setProductId(productId);
         item.setQuantity(quantity);
+        // this will do for now
+        item.setPricePerUnit(BigDecimal.valueOf(Math.random() * 100).setScale(2, RoundingMode.HALF_UP));
         items.add(item);
     }
 }

@@ -11,7 +11,6 @@ import java.util.UUID;
 public class CreateOrderCommand {
     @NotNull
     private UUID customerId;
-    @NotNull
     private BigDecimal price;
     @NotNull
     private List<OrderItemDTO> items;

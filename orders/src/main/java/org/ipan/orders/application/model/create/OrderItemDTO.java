@@ -4,15 +4,14 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Data
 public class OrderItemDTO {
     @NotNull
-    private String productId;
+    private UUID productId;
     @NotNull
     private int quantity;
-    @NotNull
     private BigDecimal price;
-    @NotNull
     private BigDecimal subtotal;
 }

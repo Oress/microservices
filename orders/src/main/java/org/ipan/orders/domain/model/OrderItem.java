@@ -11,7 +11,7 @@ import java.util.UUID;
 @Entity
 @Getter
 @Setter
-@Table(name = "order_items", schema = "order")
+@Table(name = "order_items", schema = "`order`")
 public class OrderItem {
 
     @Id
@@ -21,8 +21,10 @@ public class OrderItem {
     @ManyToOne
     private Order order;
 
-    @ManyToOne
-    private Product product;
+    private UUID productId;
+
+//    @ManyToOne
+//    private Product product;
 
     private int quantity;
 
@@ -33,7 +35,7 @@ public class OrderItem {
     private BigDecimal subtotal;
 
     public void validateItem() {
-        if (product == null) {
+        if (productId == null) {
             throw new OrderDomainException("Product must be set");
         }
         if (quantity <= 0) {

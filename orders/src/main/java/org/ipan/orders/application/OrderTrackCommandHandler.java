@@ -22,7 +22,7 @@ public class OrderTrackCommandHandler {
 
     @Transactional(readOnly = true)
     public TrackOrderResponse trackOrder(TrackOrderQuery trackOrderQuery) {
-           Optional<Order> orderResult = orderRepository.findByTrackingId(trackOrderQuery.getTrackingId());
+           Optional<Order> orderResult = orderRepository.findByTrackingNumber(trackOrderQuery.getTrackingId());
            if (orderResult.isEmpty()) {
                log.warn("Could not find order with tracking id: {}", trackOrderQuery.getTrackingId());
                throw new OrderNotFoundException("Could not find order with tracking id: " + trackOrderQuery.getTrackingId());
