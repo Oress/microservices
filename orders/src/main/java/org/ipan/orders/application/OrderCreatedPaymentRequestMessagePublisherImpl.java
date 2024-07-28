@@ -3,7 +3,7 @@ package org.ipan.orders.application;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.ipan.common.messaging.Messaging;
-import org.ipan.orders.application.model.create.messaging.OrderCreatedMessage;
+import org.ipan.common.dto.messaging.order.OrderCreatedMessage;
 import org.ipan.orders.application.ports.output.message.publisher.OrderCreatedPaymentRequestMessagePublisher;
 import org.ipan.orders.domain.event.OrderCreatedEvent;
 import org.ipan.orders.mapper.OrderMapper;

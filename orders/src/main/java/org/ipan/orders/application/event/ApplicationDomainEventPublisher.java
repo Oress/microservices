@@ -1,12 +1,6 @@
-package org.ipan.orders.application;
+package org.ipan.orders.application.event;
 
-import lombok.extern.slf4j.Slf4j;
-import org.ipan.common.event.publisher.DomainEventPublisher;
-import org.ipan.orders.domain.event.OrderCreatedEvent;
-import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.context.ApplicationEventPublisherAware;
-import org.springframework.stereotype.Component;
-
+/*
 @Component
 @Slf4j
 public class ApplicationDomainEventPublisher implements ApplicationEventPublisherAware, DomainEventPublisher<OrderCreatedEvent> {
@@ -23,3 +17,4 @@ public class ApplicationDomainEventPublisher implements ApplicationEventPublishe
         log.info("Published event: {}", event);
     }
 }
+*/

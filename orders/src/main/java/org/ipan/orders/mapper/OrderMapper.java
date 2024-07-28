@@ -3,13 +3,12 @@ package org.ipan.orders.mapper;
 import org.ipan.orders.application.model.create.CreateOrderCommand;
 import org.ipan.orders.application.model.create.CreateOrderResponse;
 import org.ipan.orders.application.model.create.OrderItemDTO;
-import org.ipan.orders.application.model.create.messaging.OrderCreatedMessage;
+import org.ipan.common.dto.messaging.order.OrderCreatedMessage;
 import org.ipan.orders.application.model.track.TrackOrderResponse;
 import org.ipan.orders.domain.event.OrderCreatedEvent;
 import org.ipan.orders.domain.model.Order;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.UUID;
 
 @Component
@@ -44,6 +43,7 @@ public class OrderMapper {
     public OrderCreatedMessage orderCreatedEventToOrderCreatedMessage(OrderCreatedEvent event) {
         return OrderCreatedMessage.builder()
                 .trackingId(event.getOrder().getTrackingNumber())
+                .totalPrice(event.getOrder().getPrice())
                 .customerId(event.getOrder().getCustomerId())
                 .orderId(event.getOrder().getId())
                 .build();
