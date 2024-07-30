@@ -7,6 +7,7 @@ import org.ipan.payment.domain.event.PaymentCancelledEvent;
 import org.ipan.payment.domain.event.PaymentCompletedEvent;
 import org.ipan.payment.domain.event.PaymentEvent;
 import org.ipan.payment.domain.event.PaymentFailedEvent;
+import org.ipan.payment.domain.exception.PaymentDomainException;
 import org.ipan.payment.domain.model.CreditEntry;
 import org.ipan.payment.domain.model.CreditHistory;
 import org.ipan.payment.domain.model.Payment;
@@ -69,6 +70,7 @@ public class PaymentDomainServiceImpl implements PaymentDomainService {
         if (payment.getPrice().compareTo(creditEntry.getTotalCreditAmount()) >= 1) {
             log.error("Customer with id: {} doesn't have enough credit for payment!", payment.getCustomerId());
             failureMessages.add("Customer with id=" + payment.getCustomerId() + " doesn't have enough credit for payment!");
+            throw new PaymentDomainException("Customer with id=" + payment.getCustomerId() + " doesn't have enough credit for payment!");
         }
     }
 

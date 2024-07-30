@@ -1,6 +1,5 @@
 version: '3.7'
 services:
-  #  rabbitmq
   rabbitmq:
     image: rabbitmq:3-management
     container_name: rabbitmq
@@ -13,7 +12,34 @@ services:
     volumes:
       - queue:/var/lib/rabbitmq
 
-  #  postgres ui
+  grafana:
+    image: grafana/grafana-oss:10.0.0
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: admin
+      GF_USERS_ALLOW_SIGN_UP: "false"
+
+  loki:
+    image: grafana/loki:3.0.0
+    container_name: loki
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+    volumes:
+      - ./loki-config.yaml:/etc/loki/local-config.yaml
+
+  prometheus:
+    image: prom/prometheus:v2.53.1
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin
@@ -22,6 +48,20 @@ services:
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: postgres
+
+
+  postgres-exporter:
+    image: quay.io/prometheuscommunity/postgres-exporter
+    container_name: postgres-exporter
+    ports:
+      - "9187:9187"
+    environment:
+      DATA_SOURCE_URI: postgres:5432/postgres?sslmode=disable
+      DATA_SOURCE_USER: postgres
+      DATA_SOURCE_PASS: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - data:/var/lib/postgresql/data
 
   postgres:
     image: postgres:16.0

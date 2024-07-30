@@ -1,0 +1,12 @@
+clients:
+  - url: http://localhost:3100/loki/api/v1/push
+
+positions:
+  filename: payment-positions.yaml
+
+scrape_configs:
+  - job_name: 'payment_logs'
+    static_configs:
+      - labels:
+          __path__: 'orders/target/logs/*.log'
+          service: 'payment'

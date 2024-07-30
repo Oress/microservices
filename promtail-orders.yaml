@@ -1,0 +1,12 @@
+clients:
+  - url: http://localhost:3100/loki/api/v1/push
+
+positions:
+  filename: orders-positions.yaml
+
+scrape_configs:
+  - job_name: 'order_logs'
+    static_configs:
+      - labels:
+          __path__: 'orders/target/logs/*.log'
+          service: 'orders'
